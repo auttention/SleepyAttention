@@ -56,9 +56,9 @@ def create_dataset(path_to_spectrograms, dataset_path, labels_path):
 
 
 def create_all_datasets(spectrograms_directory="spectrograms"):
-    create_dataset(spectrograms_directory + "/train/*.png", "dataset/train.tfrecords", "labels\labels_path_train.csv")
-    create_dataset(spectrograms_directory + "/devel/*.png", "dataset/val.tfrecords", "labels\labels_path_devel.csv")
-    create_dataset(spectrograms_directory + "/test/*.png", "dataset/test.tfrecords", "labels\labels_path_test.csv")
+    create_dataset(spectrograms_directory + "/train/*.png", "dataset/train.tfrecords", "labels/labels_path_train.csv")
+    create_dataset(spectrograms_directory + "/devel/*.png", "dataset/val.tfrecords", "labels/labels_path_devel.csv")
+    create_dataset(spectrograms_directory + "/test/*.png", "dataset/test.tfrecords", "labels/labels_path_test.csv")
 
 
 if __name__ == "__main__":

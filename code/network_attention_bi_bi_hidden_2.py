@@ -87,12 +87,6 @@ class Decoder(tf.keras.Model):
         self.batch_size = batch_size
         self.num_units = num_units
         self.projection_num_units = projection_num_units
-        #self.gru_1_f = tf.keras.layers.GRU(self.num_units, return_sequences=True, recurrent_initializer='glorot_uniform', return_state=True)
-        #self.gru_1_b = tf.keras.layers.GRU(self.num_units, return_sequences=True, recurrent_initializer='glorot_uniform', return_state=True, go_backwards=True)
-
-        #self.gru_2_f = tf.keras.layers.GRU(self.num_units, return_sequences=True, recurrent_initializer='glorot_uniform', return_state=True)
-        #self.gru_2_b = tf.keras.layers.GRU(self.num_units, return_sequences=True, recurrent_initializer='glorot_uniform', return_state=True, go_backwards=True)
-
         self.gru = tf.keras.layers.GRU(self.num_units, return_sequences=True, recurrent_initializer='glorot_uniform', return_state=True)
 
         self.projection = FullyConnectedLayer(self.projection_num_units)
@@ -101,21 +95,10 @@ class Decoder(tf.keras.Model):
     def call(self, x, decoder_hidden, encoder_output, last_encoder_hidden):
         context_vector, _ = self.attention(decoder_hidden, encoder_output)
 
-        #x = tf.keras.layers.Dropout(0.2)(x)
         x = tf.concat([tf.expand_dims(context_vector, 1), x], axis=-1)
-
-        #predictions_f, _ = self.gru_1_f(x, initial_state=last_encoder_hidden[0])
-        #predictions_b, _ = self.gru_1_b(x, initial_state=last_encoder_hidden[1])
-        #predictions = tf.concat([predictions_f, predictions_b], -1)
-
-        #predictions_f, hidden_f = self.gru_2_f(predictions)
-        #predictions_b, hidden_b = self.gru_2_b(predictions, initial_state=last_encoder_hidden[1])
 
         predictions, hidden = self.gru(x, initial_state=last_encoder_hidden)
 
-        #predictions = tf.concat([predictions_f, predictions_b], -1)
-        #hidden = tf.concat([hidden_f, hidden_b], axis=-1)
-        #projection = self.projection(tf.reshape(predictions, [predictions.shape[0], predictions.shape[2]]))
         projection = self.projection(tf.reshape(predictions, [predictions.shape[0], predictions.shape[2]]))
         return projection, hidden, context_vector
 
@@ -235,11 +218,6 @@ def extract_features(dataset, features_path, checkpoint_directory="./training_ch
         for i in range(labels.shape[0]):
             filename = filenames['filename'].numpy()[i].decode("utf-8")
             feature = [filename] + decoder_hidden.numpy()[i].tolist()
-            """
-            for i in range(1, int((len(feature)-1) / 2) + 1):
-                feature[i] = (feature[i] + feature[i + 128])/2
-            list += [feature[:129]]
-            """
             list += [feature]
     with open(features_path, 'w', newline='') as features:
         list = sorted(list)

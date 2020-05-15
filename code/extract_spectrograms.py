@@ -10,12 +10,7 @@ import create_dataset
 import numpy as np
 
 
-#PATH_TO_LABELS = "labels\labels.csv"
-# PATH_TO_LABELS = r"C:\Users\PawelWinokurow\ComParE2019_ContinuousSleepiness\ComParE2019_ContinuousSleepiness\lab\labels.csv"
-# PATH_TO_LABELS = "/Users/pawelwinokurow/Desktop/ComParE2019_ContinuousSleepiness/lab/labels.csv"
-PATH_TO_WAV = "D:\ComParE2019_ContinuousSleepiness\wav"
-# PATH_TO_WAV = r"C:\Users\PawelWinokurow\ComParE2019_ContinuousSleepiness\ComParE2019_ContinuousSleepiness\wav"
-# PATH_TO_WAV = "/Users/pawelwinokurow/Desktop/ComParE2019_ContinuousSleepiness/wav"
+PATH_TO_WAV = "ComParE2019_ContinuousSleepiness/wav"
 PATH_TO_LABELS_TRAIN = "labels/labels_path_train.csv"
 PATH_TO_LABELS_DEVEL = "labels/labels_path_devel.csv"
 PATH_TO_LABELS_TEST = "labels/labels_path_test.csv"
@@ -45,8 +40,6 @@ def read_labels_csv(labels_path):
     with open(labels_path) as labels_csv:
         reader = csv.reader(labels_csv)
         for line in reader:
-            #            if line[1] != '?':
-            #                line[1] = int(line[1])
             list += [line]
     return list
 
@@ -66,11 +59,6 @@ def create_spectrograms_and_save(n_fft, n_mels, from_directory, to_directory, li
             spectrogram = ac.create_spectrogram(os.path.join(from_directory, line[0]) + ".wav", n_fft=n_fft, n_mels=n_mels)
             spectrogram = Image.fromarray(spectrogram).convert("L")
             spectrogram.save(filename)
-            #spectrogram.savefig(filename, bbox_inches=None, pad_inches=0)
-            #spectrogram.close()
-            #img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE).astype('float32')
-            #resized_img = cv2.resize(img, (0, 0), fx=0.4, fy=0.4)
-            #cv2.imwrite(filename, resized_img)
 
 
 def extract_spectrograms(n_fft, n_mels, from_directory, to_directory, path_to_labels):

@@ -109,6 +109,7 @@ tensorboard --logdir path_to_project/tensorboard_logs
 
 #### Related projects
 [auDeep](https://www.github.com/auDeep/auDeep): Unsupervised audio representation learning via recurrent sequence-to-sequence autoencoder.
+
 [DeepSpectrum](https://www.github.com/DeepSpectrum/DeepSpectrum): Audio feature extraction with large scale image recognition CNNs.
 
 

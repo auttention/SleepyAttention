@@ -179,32 +179,6 @@ def train_network(epochs, batch_size, learning_rate, num_units, checkpoint_direc
             if epoch % 10 == 0:
                 checkpoint.save(file_prefix=checkpoint_prefix)
 
-
-"""
-def extract_reconstructed_spectrograms(dataset, spectrograms_directory, checkpoint_directory="./training_checkpoints/attention"):
-    checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
-    checkpoint.restore(tf.train.latest_checkpoint(checkpoint_directory))
-    os.makedirs(os.path.dirname(spectrograms_directory), exist_ok=True)
-    for input, filenames, labels in dataset:
-        encoder_hidden = encoder.initialize_hidden_state()
-        if input['image'].shape[0] < BATCH_SIZE:
-            zeros = tf.zeros([BATCH_SIZE - input['image'].shape[0], input['image'].shape[1], input['image'].shape[2]])
-            input['image'] = tf.concat([input['image'], zeros], 0)
-        input['image'] = (input['image'] / 255 * 2) - 1
-        encoder_ouput, decoder_hidden = encoder(encoder_hidden, input)
-        decoder_input = tf.slice(input, [0, 0, 0], [input.shape[0], input.shape[1] - 1, input.shape[2]])
-        zeros = tf.zeros([input.shape[0], 1, input.shape[2]])
-        decoder_input = tf.concat([zeros, decoder_input], 1)
-        reconstruction, _ = decoder(decoder_hidden, decoder_input, encoder_ouput)
-        reconstruction = tf.reshape(reconstruction, [reconstruction.shape[0], reconstruction.shape[2],
-                                                    reconstruction.shape[1]]).numpy()
-        for i in range(labels.shape[0]):
-            spectrogram = (((reconstruction[i] + 1) / 2) * 255).astype(np.uint8)
-            filename = filenames['filename'].numpy()[i].decode("utf-8")
-            cv2.imwrite(os.path.join(spectrograms_directory, filename), spectrogram)
-"""
-
-
 def extract_features(dataset, features_path, checkpoint_directory="./training_checkpoints/attention_bi_bi_hidden"):
     checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_directory))
@@ -232,14 +206,6 @@ def extract_all_features(features_directory, features_name, checkpoint_directory
     extract_features(load_dataset.train_input_fn(BATCH_SIZE), features_directory + '/' + features_name + ".train.csv", checkpoint_directory=checkpoint_directory)
     extract_features(load_dataset.test_input_fn(BATCH_SIZE), features_directory + '/' + features_name + ".test.csv", checkpoint_directory=checkpoint_directory)
     extract_features(load_dataset.val_input_fn(BATCH_SIZE), features_directory + '/' + features_name + ".devel.csv", checkpoint_directory=checkpoint_directory)
-
-
-"""
-def extract_all_reconstructed_spectrograms(spectrograms_directory, checkpoint_directory=checkpoint_directory):
-    extract_reconstructed_spectrograms(load_dataset.train_input_fn(BATCH_SIZE), spectrograms_directory + "/train", checkpoint_directory=checkpoint_directory)
-    extract_reconstructed_spectrograms(load_dataset.train_input_fn(BATCH_SIZE), spectrograms_directory + "/test", checkpoint_directory=checkpoint_directory)
-    extract_reconstructed_spectrograms(load_dataset.train_input_fn(BATCH_SIZE), spectrograms_directory + "/devel", checkpoint_directory=checkpoint_directory)
-"""
 
 
 if __name__ == "__main__":

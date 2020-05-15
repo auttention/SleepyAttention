@@ -113,7 +113,6 @@ def eval_sleepiness(test_predictions_path, test_labels_path):
     y_pred = limit_kss( y_pred )
     # score
     spearman_score = scipy.stats.spearmanr(y_test, y_pred)[0]
-    #pearson_score  = scipy.stats.pearsonr(y_test, y_pred)[0]
     print('SpearmanCC={0}'.format(spearman_score))
     return spearman_score
 
@@ -124,9 +123,3 @@ def fusion(seq2seq_features_path, attention_features_path, fusion_path):
     attention_features = pd.read_csv(attention_features_path, header=None).iloc[:, 1:]
     fusion_features = pd.concat([seq2seq_features, attention_features], axis=1, ignore_index=True)
     fusion_features.to_csv(fusion_path, mode='w', index=False, header=False)
-
-
-#if __name__ == "__main__":
-#    score = eval_sleepiness("attention_features.test.baseline_1.csv", "labels/labels.csv")
-#    #score = eval_sleepiness(filename="seq2seq_features.test.baseline_1.csv", path_test_labels="labels/labels.csv")
-#    print('SpearmanCC={0}'.format(score))
