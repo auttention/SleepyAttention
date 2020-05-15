@@ -82,10 +82,6 @@ def normalize_spectrograms(directory):
     print(min)
     for addr in addrs:
         img = np.asarray(PIL.Image.open(addr))
-        #if img.shape[1] < 160:
-        #   pad_size = 160 - img.shape[1]
-        #    img = np.pad(img, ((0, 0), (0, pad_size)), "constant", constant_values=(0))
-        #else:
         img = img[:,:min]
         img = Image.fromarray(img)
         img.save(addr)

@@ -16,7 +16,6 @@ def parser(record):
     width = tf.cast(parsed['width'], tf.int32)
     image = tf.decode_raw(parsed["image_raw"], tf.uint8)
     image = tf.reshape(image, tf.stack([width, height]))
-    #image = tf.reshape(image, shape=[431, 96])
     image = tf.cast(image, tf.float32)
     return {'image': image}, {'filename': filename}, parsed["label"]
 
