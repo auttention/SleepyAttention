@@ -1,7 +1,6 @@
 import tensorflow as tf
 
 directory = "dataset/"
-#directory = "./drive/My Drive/dataset/"
 
 def parser(record):
     keys_to_features = {

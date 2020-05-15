@@ -227,11 +227,6 @@ def extract_features(dataset, features_path, checkpoint_directory="./training_ch
         for i in range(labels.shape[0]):
             filename = filenames['filename'].numpy()[i].decode("utf-8")
             feature = [filename] + decoder_hidden.numpy()[i].tolist()
-            """
-            for i in range(1, int((len(feature)-1) / 2) + 1):
-                feature[i] = (feature[i] + feature[i + 128])/2
-            list += [feature[:129]]
-            """
             list += [feature]
     with open(features_path, 'w', newline='') as features:
         list = sorted(list)
