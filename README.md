@@ -9,7 +9,7 @@ Please direct any questions or requests to Shahin Amiriparian (shahin.amiriparia
 
 # Citing
 If you use *auttention* or any code from *auttention* in your research work, you are kindly asked to acknowledge the use of *auttention* in your publications. You can find our paper [here](https://arxiv.org/pdf/2005.08722).
-> S. Amiriparian, P. Winokurov, V. Karas, S. Ottl, M. Gerczuk, B. Schuller. "A Novel Fusion of Attention and Sequence to Sequence Autoencoders to Predict Sleepiness From Speech", arxiv.org, May 2020. 5 pages.
+> S. Amiriparian, P. Winokurow, V. Karas, S. Ottl, M. Gerczuk, B. Schuller. "A Novel Fusion of Attention and Sequence to Sequence Autoencoders to Predict Sleepiness From Speech", arxiv.org, May 2020. 5 pages.
 
 
 ## Requirements
