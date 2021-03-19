@@ -44,7 +44,7 @@ opencv-python==3.4.5.20
 pandas==0.24.2
 pbr==5.1.3
 pdf2image==1.3.1
-Pillow==6.0.0
+Pillow==8.1.1
 protobuf==3.7.1
 pykg-config==1.3.0
 pylint==2.2.2
