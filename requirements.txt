@@ -54,7 +54,7 @@ pytesseract==0.2.6
 python-dateutil==2.8.0
 pytz==2019.1
 PyWavelets==1.0.3
-PyYAML==5.1.1
+PyYAML==5.4
 requests==2.21.0
 resampy==0.2.1
 scikit-image==0.14.2
