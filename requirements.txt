@@ -45,7 +45,7 @@ pandas==0.24.2
 pbr==5.1.3
 pdf2image==1.3.1
 Pillow==6.0.0
-protobuf==3.7.1
+protobuf==3.15.0
 pykg-config==1.3.0
 pylint==2.2.2
 pyowm==2.10.0
