@@ -39,7 +39,7 @@ mock==3.0.4
 networkx==2.2
 npyscreen==4.10.5
 numba==0.43.1
-numpy==1.16.2
+numpy==1.22.0
 opencv-python==3.4.5.20
 pandas==0.24.2
 pbr==5.1.3
